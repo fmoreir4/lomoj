@@ -4,7 +4,7 @@
 
     <div class="form-group">
         <label for=""></label>
-        <input type="file" class="form-control" name="foto" placeholder="Foto perfil">
+        <input type="file" class="form-control" name="fotoperfil" placeholder="Foto perfil">
     </div>
 
     <div class="form-group">

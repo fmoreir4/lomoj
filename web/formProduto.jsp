@@ -23,20 +23,15 @@
     </div>
 
     <div class="form-check">
-        <input type="radio" class="form-check-input" name="ativo" value="1"checked><label class="form-check-label">Ativo</label>
+        <input type="radio" class="form-check-input" name="ativo" value="1" checked><label class="form-check-label">Ativo</label>
     </div>
     <div class="form-check">
         <input type="radio" class="form-check-input" name="ativo" value="0"><label class="form-check-label">Bloaqueado</label>
     </div>
 
-    <div class="input-group mb-3">
-        <div class="custom-file">
-            <input type="file" class="custom-file-input" id="inputGroupFile01">
-            <label class="custom-file-label" for="inputGroupFile01" aria-describedby="inputGroupFileAddon01">Foto 01</label>
-        </div>
-        <div class="input-group-append">
-            <span class="input-group-text" id="inputGroupFileAddon01">Enviar</span>
-        </div>
+    <div class="form-group">
+        <label for=""></label>
+        <input type="file" class="form-control" name="foto01" placeholder="Foto 1">
     </div>
 
     <div class="form-group">

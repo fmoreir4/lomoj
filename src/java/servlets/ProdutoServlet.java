@@ -1,26 +1,23 @@
 package servlets;
 
-import controller.CtrlCliente;
+import controller.CtrlProduto;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Cliente;
+import model.Produto;
 
 @MultipartConfig
-@WebServlet(name = "ClienteServlet", urlPatterns = {"/Cliente"})
-public class ClienteServlet extends HttpServlet {
+@WebServlet(name = "ProdutoServlet", urlPatterns = {"/Produto"})
+public class ProdutoServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
         String pagina = "index.jsp";
         String acao = request.getParameter("acao");
@@ -28,49 +25,27 @@ public class ClienteServlet extends HttpServlet {
         //Cadastro
         if (acao.equals("cad")) {
             try {
-                Cliente cliente = new Cliente();
-                CtrlCliente ctrlCliente = new CtrlCliente();
-                cliente.setNome(request.getParameter("nome"));
-                cliente.setEmail(request.getParameter("email"));
-                cliente.setPws(request.getParameter("pws"));
-                cliente.setFoto(request.getPart("fotoperfil").getSubmittedFileName());
+                Produto produto = new Produto();
+                CtrlProduto ctrlProduto = new CtrlProduto();
+                produto.setNome(request.getParameter("nome"));
+                produto.setDescricao(request.getParameter("descricao"));
+                produto.setQuant(Integer.parseInt(request.getParameter("quant")));
+                produto.setValor(Float.parseFloat(request.getParameter("valor")));
+                produto.setFoto01(request.getPart("foto01").getSubmittedFileName());
+                produto.setFoto02(request.getPart("foto02").getSubmittedFileName());
+                produto.setFoto03(request.getPart("foto03").getSubmittedFileName());
+                if (request.getParameter("ativo").equals("1"))
+                    produto.setAtivo(true);
+                else
+                    produto.setAtivo(false);
                 
-                //String para Data
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		Calendar cal = Calendar.getInstance();
-                cliente.setDataNasc(cal);
-                
-                cliente.validar(request.getParameter("pwsc"));
-                ctrlCliente.cadastrar(cliente);
+                produto.validar();
+                ctrlProduto.cadastrar(produto);
                 request.setAttribute("avisos", "Cadastrado");
             } catch (Exception ex) {
                 request.setAttribute("erros", ex.getMessage());
             }
-            pagina = "index.jsp?p=formCliente";
-        }
-
-        //Login
-        if (acao.equals("log")) {
-            try {
-                CtrlCliente ctrlCliente = new CtrlCliente();
-                String email = request.getParameter("email");
-                String pws = request.getParameter("pws");
-                Cliente cliente = ctrlCliente.login(email, pws);
-                HttpSession user = request.getSession();
-                cliente.setPws("");
-                user.setAttribute("cliente", cliente);
-            } catch (Exception ex) {
-                request.setAttribute("erros", "Usuário ou senha invalido");
-                pagina = "index.jsp?p=login";
-            }
-        }
-
-        if (acao.equals("off")) {
-            HttpSession user = request.getSession();
-            //Remove um item da session
-            //user.removeAttribute("cliente");
-            //Apaga a session user
-            user.invalidate();
+            pagina = "index.jsp?p=formProduto";
         }
 
         //Retorna para a página
