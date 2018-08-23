@@ -4,7 +4,6 @@ import controller.CtrlCliente;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +20,7 @@ public class ClienteServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
         String pagina = "index.jsp";
         String acao = request.getParameter("acao");
@@ -44,7 +44,7 @@ public class ClienteServlet extends HttpServlet {
                 ctrlCliente.cadastrar(cliente);
                 request.setAttribute("avisos", "Cadastrado");
             } catch (Exception ex) {
-                request.setAttribute("erros", ex.getMessage());
+                request.setAttribute("erros", ex.getMessage().replace("\n","<br>"));
             }
             pagina = "index.jsp?p=formCliente";
         }

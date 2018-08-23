@@ -29,21 +29,29 @@ public class ProdutoServlet extends HttpServlet {
                 CtrlProduto ctrlProduto = new CtrlProduto();
                 produto.setNome(request.getParameter("nome"));
                 produto.setDescricao(request.getParameter("descricao"));
-                produto.setQuant(Integer.parseInt(request.getParameter("quant")));
-                produto.setValor(Float.parseFloat(request.getParameter("valor")));
+
+                if (!request.getParameter("quant").equals("")) {
+                    produto.setQuant(Integer.parseInt(request.getParameter("quant")));
+                }
+
+                if (!request.getParameter("valor").equals("")) {
+                    produto.setValor(Float.parseFloat(request.getParameter("valor")));
+                }
+
                 produto.setFoto01(request.getPart("foto01").getSubmittedFileName());
                 produto.setFoto02(request.getPart("foto02").getSubmittedFileName());
                 produto.setFoto03(request.getPart("foto03").getSubmittedFileName());
-                if (request.getParameter("ativo").equals("1"))
+                if (request.getParameter("ativo").equals("1")) {
                     produto.setAtivo(true);
-                else
+                } else {
                     produto.setAtivo(false);
-                
+                }
+
                 produto.validar();
                 ctrlProduto.cadastrar(produto);
                 request.setAttribute("avisos", "Cadastrado");
             } catch (Exception ex) {
-                request.setAttribute("erros", ex.getMessage());
+                request.setAttribute("erros", ex.getMessage().replace("\n","<br>"));
             }
             pagina = "index.jsp?p=formProduto";
         }

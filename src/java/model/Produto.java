@@ -17,8 +17,8 @@ public class Produto implements Serializable {
 
     private String nome;
     private String descricao;
-    private float valor;
-    private int quant;
+    private float valor = 0;
+    private int quant = 0;
     private String Foto01;
     private String Foto02;
     private String Foto03;

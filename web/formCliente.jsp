@@ -26,7 +26,7 @@
         <input type="radio" class="form-check-input" name="ativo" value="1"checked><label class="form-check-label">Ativo</label>
     </div>
     <div class="form-check">
-        <input type="radio" class="form-check-input" name="ativo" value="0"><label class="form-check-label">Bloaqueado</label>
+        <input type="radio" class="form-check-input" name="ativo" value="0"><label class="form-check-label">Bloqueado</label>
     </div>
 
     <div class="form-group">
