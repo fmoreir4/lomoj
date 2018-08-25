@@ -35,9 +35,10 @@ public class ClienteServlet extends HttpServlet {
                 cliente.setPws(request.getParameter("pws"));
                 cliente.setFoto(request.getPart("fotoperfil").getSubmittedFileName());
                 
-                //String para Data
+                //String para Data(Calendar)
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		Calendar cal = Calendar.getInstance();
+                cal.setTime(sdf.parse(request.getParameter("dataNasc")));
                 cliente.setDataNasc(cal);
                 
                 cliente.validar(request.getParameter("pwsc"));

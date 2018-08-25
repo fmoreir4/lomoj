@@ -19,7 +19,7 @@
 
     <div class="form-group">
         <label for=""></label>
-        <input type="date" class="form-control" name="dataNasc" placeholder="Data de Nascimento (dd/mm/aaaa)">
+        <input type="text" class="form-control" name="dataNasc" placeholder="Data de Nascimento (dd/mm/aaaa)" id="datepicker">
     </div>
 
     <div class="form-check">
@@ -38,10 +38,9 @@
         <label for=""></label>
         <input type="password" class="form-control" name="pwsc" placeholder="Confirmação de senha">
     </div>
-    
+
     <div class="form-group float-right">
         <button type="submit" class="btn btn-primary">Salvar</button>
         <button type="reset" class="btn btn-primary">Cancelar</button>
     </div>
-    
 </form>
