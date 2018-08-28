@@ -4,6 +4,7 @@ import controller.CtrlCliente;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -66,6 +67,7 @@ public class ClienteServlet extends HttpServlet {
             }
         }
 
+        //Logoff(sair)
         if (acao.equals("off")) {
             HttpSession user = request.getSession();
             //Remove um item da session
@@ -73,7 +75,21 @@ public class ClienteServlet extends HttpServlet {
             //Apaga a session user
             user.invalidate();
         }
-
+        
+        //Pesquisar
+        if(acao.equals("pesq")){
+            CtrlCliente ctrlcliente = new CtrlCliente();
+            String dados = request.getParameter("dados").trim();
+            try {
+                List <Cliente> clientes = ctrlcliente.pesquisa(dados);
+                request.setAttribute("clientes", clientes);
+            } catch (Exception ex) {
+               request.setAttribute("erros", "Dados não encontrados.");
+            }
+            pagina = "index.jsp?p=reportCliente";
+        }
+        
+        
         //Retorna para a página
         request.getRequestDispatcher(pagina).forward(request, response);
     }

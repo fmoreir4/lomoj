@@ -1,6 +1,7 @@
 package controller;
 
 import dao.ClienteDAO;
+import java.util.List;
 import model.Cliente;
 
 public class CtrlCliente {
@@ -17,4 +18,8 @@ public class CtrlCliente {
         return dao.findCliente(email, senha);
     }
 
+    public List<Cliente> pesquisa(String dados)throws Exception{
+        dao = new ClienteDAO();
+        return dao.findClientes(dados);
+    }
 }
