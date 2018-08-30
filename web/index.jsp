@@ -57,8 +57,10 @@
         </nav>
 
         <header class="jumbotron">
-            <h1> LOMOJ </h1>
-            <h3> A loja que vende tudo </h3>
+            <div class="container">
+                <h1> LOMOJ </h1>
+                <h3> A loja que vende tudo </h3>
+            </div>
         </header>
 
         <c:if test="${not empty avisos}">

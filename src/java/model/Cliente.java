@@ -39,46 +39,6 @@ public class Cliente implements Serializable {
 
     private boolean ativo = true;
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPws() {
-        return pws;
-    }
-
-    public void setPws(String pws) {
-        this.pws = pws;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -107,12 +67,20 @@ public class Cliente implements Serializable {
     private String isDados() {
         String erros = "";
 
+        if (foto.equals("")) {
+            erros += "Foto do perfil em branco.\n";
+        }
+        
         if (nome.equals("")) {
             erros += "Nome em branco.\n";
         }
 
         if (email.equals("")) {
             erros += "E-mail em branco.\n";
+        }
+
+        if (dataNasc == null) {
+            erros += "Data de nascimento invalida ou em branco.\n";
         }
 
         return erros;
@@ -160,4 +128,43 @@ public class Cliente implements Serializable {
         this.ativo = ativo;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPws() {
+        return pws;
+    }
+
+    public void setPws(String pws) {
+        this.pws = pws;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

@@ -2,6 +2,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <form action="Produto" method="get" class="form">
+    <h2> Pesquisa de Produtos </h2>
     <input type="hidden" name="acao" value="pesq">
     <div class="form-group">
         <label for=""> Pesquisar </label>
@@ -14,7 +15,7 @@
 
 <table class="table">
     <tr>
-        <th>ID</th><th>Nome</th> <th>Descrição</th><th>Foto 1</th> <th>Foto 2</th><th>Foto 3</th><th> / </th> <th> X </th>
+        <th>ID</th> <th>Nome</th> <th>Descrição</th> <th>Foto 1</th> <th>Foto 2</th> <th>Foto 3</th>  <th>Quant.</th> <th>Valor</th> <th> / </th> <th> X </th>
     </tr>
     <c:forEach items="${produtos}" var="produto">
         <tr>
@@ -24,6 +25,8 @@
             <td>${produto.foto01}</td>
             <td>${produto.foto02}</td>
             <td>${produto.foto03}</td>
+            <td>${produto.quant}</td>
+            <td>${produto.valor}</td>
             <td>/</td>
             <td>X</td>
         </tr> 

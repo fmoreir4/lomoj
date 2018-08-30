@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Cliente;
+import util.Arquivo;
 
 @MultipartConfig
 @WebServlet(name = "ClienteServlet", urlPatterns = {"/Cliente"})
@@ -25,24 +26,36 @@ public class ClienteServlet extends HttpServlet {
 
         String pagina = "index.jsp";
         String acao = request.getParameter("acao");
+        String caminhoFoto = System.getProperty("user.home") + ""
+                + "/NetBeansProjects/lomoj/web/img/clientes/";
 
         //Cadastro
         if (acao.equals("cad")) {
             try {
                 Cliente cliente = new Cliente();
                 CtrlCliente ctrlCliente = new CtrlCliente();
+                Arquivo arq = new Arquivo();
+
                 cliente.setNome(request.getParameter("nome"));
                 cliente.setEmail(request.getParameter("email"));
                 cliente.setPws(request.getParameter("pws"));
                 cliente.setFoto(request.getPart("fotoperfil").getSubmittedFileName());
 
-                //String para Data(Calendar)
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(sdf.parse(request.getParameter("dataNasc")));
-                cliente.setDataNasc(cal);
+                if (!request.getParameter("dataNasc").equals("")) {
+                    //String para Data(Calendar)
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(sdf.parse(request.getParameter("dataNasc")));
+                    cliente.setDataNasc(cal);
+                }
 
                 cliente.validar(request.getParameter("pwsc"));
+                
+                //Upload da Foto
+                cliente.setFoto(arq.upload(caminhoFoto,
+                        request.getPart("fotoperfil").getSubmittedFileName(),
+                        request.getPart("fotoperfil").getInputStream()));
+
                 ctrlCliente.cadastrar(cliente);
                 request.setAttribute("avisos", "Cadastrado");
             } catch (Exception ex) {

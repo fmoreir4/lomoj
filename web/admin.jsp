@@ -14,7 +14,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <c:if test="${empty funcioanrio}">
+            <c:if test="${not empty funcioanrio}">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item dropdown">
@@ -22,8 +22,8 @@
                                 Cadastro
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="index.jsp?p=formFuncionario">Funcionario</a>
-                                <a class="dropdown-item" href="index.jsp?p=formProduto">Produto</a>
+                                <a class="dropdown-item" href="admin.jsp?p=formFuncionario">Funcionario</a>
+                                <a class="dropdown-item" href="admin.jsp?p=formProduto">Produto</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -31,13 +31,13 @@
                                 Relatórios
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="index.jsp?p=reportFuncionario">Funcionario</a>
-                                <a class="dropdown-item" href="index.jsp?p=reportProduto">Produto</a>
-                                <a class="dropdown-item" href="index.jsp?p=reportCliente">Clientes</a>
+                                <a class="dropdown-item" href="admin.jsp?p=reportFuncionario">Funcionario</a>
+                                <a class="dropdown-item" href="admin.jsp?p=reportProduto">Produto</a>
+                                <a class="dropdown-item" href="admin.jsp?p=reportCliente">Clientes</a>
                             </div>
                         </li>
 
-                        <c:if test="${empty funcionario.nome}">
+                        <c:if test="${not empty funcionario.nome}">
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item">
                                     <a class="nav-link">${funcionario.nome}</a>
@@ -51,7 +51,7 @@
                 </div>
             </c:if>
         </nav>
-
+        <%-- Mensagem --%>
         <c:if test="${not empty avisos}">
             <div class="alert alert-success">
                 <p>${avisos}</p>
@@ -69,25 +69,21 @@
         </c:if>
 
         <section class="container">
-            <c:if test="${empty funcionario}">
+            <c:if test="${not empty funcionario}">
                 <c:if test="${not empty param.p}">
-                    <c:import url="../${param.p}.jsp"/>
+                    <c:import url="${param.p}.jsp"/>
                 </c:if>
             </c:if>
             <c:if test="${empty funcionario}">
+                <%-- Login Funcionario --%>
                 <div class="row justify-content-center">
-
                     <form method="post" action="Func" class="col-md-6">
-
                         <input type="hidden" name="acao" value="log">
-
                         <h2 class="p-3 text-center"> login do funcionario</h2>
-
                         <div class="form-group py-3">
                             <label for="e-mail">e-mail</label>
                             <input type="email" name="email" class="form-control p-2" value="${email}" placeholder="Ex. paulosilva@email.com">
                         </div>
-
                         <div class="form-group py-3">
                             <label for="senha" class="float-left">senha</label> 
                             <span class="float-right"><a href="#">esqueceu?</a></span>
@@ -98,12 +94,12 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-group py-3">
                             <button class="btn btn-lg btn-block p-2">continuar</button>
                         </div>
                     </form>
                 </div>
+
             </c:if>
         </section>
 

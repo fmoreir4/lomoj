@@ -2,6 +2,7 @@ package servlets;
 
 import controller.CtrlProduto;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -55,6 +56,20 @@ public class ProdutoServlet extends HttpServlet {
             }
             pagina = "admin.jsp?p=formProduto";
         }
+        
+          //Pesquisar
+        if (acao.equals("pesq")) {
+            CtrlProduto ctrlProduto = new CtrlProduto();
+            String dados = request.getParameter("dados").trim();
+            try {
+                List<Produto> produtos = ctrlProduto.pesquisar(dados);
+                request.setAttribute("produtos", produtos);
+            } catch (Exception ex) {
+                request.setAttribute("erros", "Dados não encontrados.");
+            }
+            pagina = "admin.jsp?p=reportProduto";
+        }
+
 
         //Retorna para a página
         request.getRequestDispatcher(pagina).forward(request, response);

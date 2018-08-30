@@ -6,15 +6,20 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class Arquivo {
 
-    public void upload(String pasta, String nomeDoArquivo,
-            InputStream arquivoCarregado) throws FileNotFoundException {
+    public String upload(String pasta, String nomeDoArquivo, InputStream arquivoCarregado)
+            throws FileNotFoundException {
+        nomeDoArquivo = crypt(nomeDoArquivo) + ".jpg";
         String caminhoArquivo = pasta + File.separator + nomeDoArquivo;
         File novoArquivo = new File(caminhoArquivo);
         FileOutputStream saida = new FileOutputStream(novoArquivo);
         copiar(arquivoCarregado, saida);
+        return nomeDoArquivo;
     }
 
     private void copiar(InputStream origem, OutputStream destino) {
@@ -31,16 +36,25 @@ public class Arquivo {
             e.printStackTrace();
         }
     }
+
+    private String crypt(String psw) {
+        try {
+            MessageDigest m = MessageDigest.getInstance("MD5");
+            m.update(psw.getBytes(), 0, psw.length());
+            return new BigInteger(1, m.digest()).toString(16);
+        } catch (NoSuchAlgorithmException ex) {
+            return null;
+        }
+    }
 }
-//form:  enctype="multipart/form-data"
 /*
+form:  enctype="multipart/form-data"    
 public class ArquivoController {
- 
-  public void upload(UploadedFile upload) {
-    Arquivo arquivo = new Arquivo();
-    arquivo.upload("/home/matheus/arquivos", upload.getFileName(),
-      upload.getFile());
-  }
- 
+    public void upload(UploadedFile upload) {
+        Arquivo arquivo = new Arquivo();
+        arquivo.upload("/home/matheus/arquivos", upload.getFileName(),
+        upload.getFile());
+    }
+
 }
  */
