@@ -1,7 +1,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<form action="Cliente" method="get" class="form">
+<form action="Produto" method="get" class="form">
     <input type="hidden" name="acao" value="pesq">
     <div class="form-group">
         <label for=""> Pesquisar </label>
@@ -14,15 +14,16 @@
 
 <table class="table">
     <tr>
-        <th>ID</th> <th>Foto</th><th>Nome</th> <th>E-mail</th> <th>Data Nasc.</th> <th> / </th> <th> X </th>
+        <th>ID</th><th>Nome</th> <th>Descrição</th><th>Foto 1</th> <th>Foto 2</th><th>Foto 3</th><th> / </th> <th> X </th>
     </tr>
-    <c:forEach items="${clientes}" var="cliente">
+    <c:forEach items="${produtos}" var="produto">
         <tr>
-            <td>${cliente.id}</td>
-            <td>${cliente.foto}</td>
-            <td>${cliente.nome}</td>
-            <td>${cliente.email}</td>
-            <td><fmt:formatDate value="${cliente.dataNasc.time}" type="date"/></td>
+            <td>${produto.id}</td>
+            <td>${produto.nome}</td>
+            <td>${produto.descricao}</td>
+            <td>${produto.foto01}</td>
+            <td>${produto.foto02}</td>
+            <td>${produto.foto03}</td>
             <td>/</td>
             <td>X</td>
         </tr> 

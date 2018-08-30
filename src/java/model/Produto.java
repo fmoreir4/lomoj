@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class Produto implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -19,9 +19,9 @@ public class Produto implements Serializable {
     private String descricao;
     private float valor = 0;
     private int quant = 0;
-    private String Foto01;
-    private String Foto02;
-    private String Foto03;
+    private String foto01;
+    private String foto02;
+    private String foto03;
     private boolean ativo = true;
 
     @Override
@@ -68,7 +68,7 @@ public class Produto implements Serializable {
             erros += "Quantidade zerada ou negativa.\n";
         }
 
-        if (Foto01.equals("")) {
+        if (foto01.equals("")) {
             erros += "Produto sem foto.\n";
         }
 
@@ -123,27 +123,27 @@ public class Produto implements Serializable {
     }
 
     public String getFoto01() {
-        return Foto01;
+        return foto01;
     }
 
     public void setFoto01(String Foto01) {
-        this.Foto01 = Foto01;
+        this.foto01 = Foto01;
     }
 
     public String getFoto02() {
-        return Foto02;
+        return foto02;
     }
 
     public void setFoto02(String Foto02) {
-        this.Foto02 = Foto02;
+        this.foto02 = Foto02;
     }
 
     public String getFoto03() {
-        return Foto03;
+        return foto03;
     }
 
     public void setFoto03(String Foto03) {
-        this.Foto03 = Foto03;
+        this.foto03 = Foto03;
     }
 
     public boolean isAtivo() {

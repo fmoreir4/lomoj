@@ -83,7 +83,7 @@
             </c:if>
         </section>
 
-        <footer>
+        <footer class="jumbotron bg-dark">
 
         </footer>
 
@@ -95,7 +95,7 @@
         <script src="js/jquery-ui.min.js"></script>
         <link rel="stylesheet"  href="js/jquery-ui.structure.min.css">
         <link rel="stylesheet"  href="js/jquery-ui.theme.min.css">
-        
+
         <script src="js/datepicker.js"></script>
     </body>
 </html>

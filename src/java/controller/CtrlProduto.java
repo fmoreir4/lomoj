@@ -12,5 +12,4 @@ public class CtrlProduto {
         dao.create(produto);
     }
 
-
 }

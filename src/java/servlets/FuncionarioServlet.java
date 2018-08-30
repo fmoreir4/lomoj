@@ -1,9 +1,7 @@
 package servlets;
 
-import controller.CtrlCliente;
+import controller.CtrlFuncionario;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -12,58 +10,52 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Cliente;
+import model.Funcionario;
 
 @MultipartConfig
-@WebServlet(name = "ClienteServlet", urlPatterns = {"/Cliente"})
-public class ClienteServlet extends HttpServlet {
+@WebServlet(name = "FuncionarioServlet", urlPatterns = {"/Func"})
+public class FuncionarioServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
 
-        String pagina = "index.jsp";
+        String pagina = "admin.jsp";
         String acao = request.getParameter("acao");
 
         //Cadastro
         if (acao.equals("cad")) {
             try {
-                Cliente cliente = new Cliente();
-                CtrlCliente ctrlCliente = new CtrlCliente();
-                cliente.setNome(request.getParameter("nome"));
-                cliente.setEmail(request.getParameter("email"));
-                cliente.setPws(request.getParameter("pws"));
-                cliente.setFoto(request.getPart("fotoperfil").getSubmittedFileName());
+                Funcionario funcionario = new Funcionario();
+                CtrlFuncionario ctrlFuncionario = new CtrlFuncionario();
+                funcionario.setNome(request.getParameter("nome"));
+                funcionario.setEmail(request.getParameter("email"));
+                funcionario.setPws(request.getParameter("pws"));
+                funcionario.setFoto(request.getPart("fotoperfil").getSubmittedFileName());
 
-                //String para Data(Calendar)
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(sdf.parse(request.getParameter("dataNasc")));
-                cliente.setDataNasc(cal);
-
-                cliente.validar(request.getParameter("pwsc"));
-                ctrlCliente.cadastrar(cliente);
+                funcionario.validar(request.getParameter("pwsc"));
+                ctrlFuncionario.cadastrar(funcionario);
                 request.setAttribute("avisos", "Cadastrado");
             } catch (Exception ex) {
                 request.setAttribute("erros", ex.getMessage().replace("\n", "<br>"));
             }
-            pagina = "index.jsp?p=formCliente";
+            pagina = "admin.jsp?p=formFuncionario";
         }
 
         //Login
         if (acao.equals("log")) {
             try {
-                CtrlCliente ctrlCliente = new CtrlCliente();
+                CtrlFuncionario ctrlFuncionario = new CtrlFuncionario();
                 String email = request.getParameter("email");
                 String pws = request.getParameter("pws");
-                Cliente cliente = ctrlCliente.login(email, pws);
+                Funcionario funcionario = ctrlFuncionario.login(email, pws);
                 HttpSession user = request.getSession();
-                cliente.setPws("");
-                user.setAttribute("cliente", cliente);
+                funcionario.setPws("");
+                user.setAttribute("funcionario", funcionario);
             } catch (Exception ex) {
                 request.setAttribute("erros", "Usuário ou senha invalido");
-                pagina = "index.jsp?p=login";
+                pagina = "admin.jsp?p=login";
             }
         }
 
@@ -71,22 +63,22 @@ public class ClienteServlet extends HttpServlet {
         if (acao.equals("off")) {
             HttpSession user = request.getSession();
             //Remove um item da session
-            //user.removeAttribute("cliente");
+            //user.removeAttribute("funcionario");
             //Apaga a session user
             user.invalidate();
         }
 
         //Pesquisar
         if (acao.equals("pesq")) {
-            CtrlCliente ctrlcliente = new CtrlCliente();
+            CtrlFuncionario ctrlfuncionario = new CtrlFuncionario();
             String dados = request.getParameter("dados").trim();
             try {
-                List<Cliente> clientes = ctrlcliente.pesquisa(dados);
-                request.setAttribute("clientes", clientes);
+                List<Funcionario> funcionarios = ctrlfuncionario.pesquisa(dados);
+                request.setAttribute("funcionarios", funcionarios);
             } catch (Exception ex) {
                 request.setAttribute("erros", "Dados não encontrados.");
             }
-            pagina = "admin.jsp?p=reportCliente";
+            pagina = "admin.jsp?p=reportFuncionario";
         }
 
         //Retorna para a página

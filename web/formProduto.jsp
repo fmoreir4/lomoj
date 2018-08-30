@@ -44,7 +44,7 @@
         <input type="file" class="form-control" name="foto03" placeholder="Foto 2">
     </div>
 
-    <div class="form-group float-right">
+    <div class="form-group  text-right">
         <button type="submit" class="btn btn-primary">Salvar</button>
         <button type="reset" class="btn btn-primary">Cancelar</button>
     </div>

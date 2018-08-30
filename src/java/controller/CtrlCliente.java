@@ -18,7 +18,7 @@ public class CtrlCliente {
         return dao.findCliente(email, senha);
     }
 
-    public List<Cliente> pesquisa(String dados)throws Exception{
+    public List<Cliente> pesquisa(String dados) throws Exception {
         dao = new ClienteDAO();
         return dao.findClientes(dados);
     }

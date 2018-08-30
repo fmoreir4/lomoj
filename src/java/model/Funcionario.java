@@ -1,25 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
 
-/**
- *
- * @author Aluno
- */
 @Entity
-public class Cliente implements Serializable {
+public class Funcionario implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -27,57 +16,12 @@ public class Cliente implements Serializable {
     private Long id;
 
     private String nome;
-
     @Column(unique = true)
     private String email;
-
     private String pws;
     private String foto;
-
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Calendar dataNasc;
-
+    private String cargo;
     private boolean ativo = true;
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPws() {
-        return pws;
-    }
-
-    public void setPws(String pws) {
-        this.pws = pws;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Override
     public int hashCode() {
@@ -89,10 +33,10 @@ public class Cliente implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cliente)) {
+        if (!(object instanceof Funcionario)) {
             return false;
         }
-        Cliente other = (Cliente) object;
+        Funcionario other = (Funcionario) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -144,20 +88,60 @@ public class Cliente implements Serializable {
         }
     }
 
-    public Calendar getDataNasc() {
-        return dataNasc;
-    }
-
-    public void setDataNasc(Calendar dataNasc) {
-        this.dataNasc = dataNasc;
-    }
-
     public boolean isAtivo() {
         return ativo;
     }
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPws() {
+        return pws;
+    }
+
+    public void setPws(String pws) {
+        this.pws = pws;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
     }
 
 }

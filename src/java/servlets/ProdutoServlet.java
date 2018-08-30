@@ -51,9 +51,9 @@ public class ProdutoServlet extends HttpServlet {
                 ctrlProduto.cadastrar(produto);
                 request.setAttribute("avisos", "Cadastrado");
             } catch (Exception ex) {
-                request.setAttribute("erros", ex.getMessage().replace("\n","<br>"));
+                request.setAttribute("erros", ex.getMessage().replace("\n", "<br>"));
             }
-            pagina = "index.jsp?p=formProduto";
+            pagina = "admin.jsp?p=formProduto";
         }
 
         //Retorna para a página

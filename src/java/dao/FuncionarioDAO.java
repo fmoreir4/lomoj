@@ -7,12 +7,12 @@ import javax.persistence.EntityNotFoundException;
 //import javax.persistence.EntityTransaction;
 //import javax.persistence.Persistence;
 import javax.persistence.Query;
-import model.Produto;
+import model.Funcionario;
 
-public class ProdutoDAO extends ConectaJPA {
+public class FuncionarioDAO extends ConectaJPA {
 
     //Salvar 
-    public void create(Produto dados) throws Exception {
+    public void create(Funcionario dados) throws Exception {
         et = em.getTransaction();
         try {
             et.begin();
@@ -33,7 +33,7 @@ public class ProdutoDAO extends ConectaJPA {
     }
 
     //Alterar 
-    public void edit(Produto dados) throws Exception {
+    public void edit(Funcionario dados) throws Exception {
         et = em.getTransaction();
         try {
             et.begin();
@@ -48,7 +48,7 @@ public class ProdutoDAO extends ConectaJPA {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 Long id = dados.getId();
-                if (findProduto(id) == null) {
+                if (findFuncionario(id) == null) {
 
                 }
             }
@@ -65,9 +65,9 @@ public class ProdutoDAO extends ConectaJPA {
         et = em.getTransaction();
         try {
             et.begin();
-            Produto dados = null;
+            Funcionario dados = null;
             try {
-                dados = em.getReference(Produto.class, id);
+                dados = em.getReference(Funcionario.class, id);
                 dados.getId();
             } catch (EntityNotFoundException enfe) {
 
@@ -89,21 +89,35 @@ public class ProdutoDAO extends ConectaJPA {
     }
 
     //Busca pelo ID
-    public Produto findProduto(Long id) {
+    public Funcionario findFuncionario(Long id) {
         try {
-            return em.find(Produto.class, id);
+            return em.find(Funcionario.class, id);
         } finally {
             em.close();
         }
     }
 
     //Buscar todos por nomes
-    public List<Produto> findProdutos(String dado) {
+    public List<Funcionario> findFuncionarios(String dado) {
         try {
-            Query query = em.createQuery("select x from Produto as x where x.nome like :dados and x.ativo = 1");
+            Query query = em.createQuery("select x from Funcionario as x where x.nome like :dados and x.ativo = 1");
             query.setParameter("dados", dado + "%");
-            List<Produto> lista = query.getResultList();
+            List<Funcionario> lista = query.getResultList();
             return lista;
+        } finally {
+            em.close();
+        }
+    }
+
+    //Busca dados pela email e senha
+    public Funcionario findFuncionario(String email, String pws) {
+        try {
+            Query query = em.createQuery(""
+                    + "select x from Funcionario as x "
+                    + "where x.email = :email and x.pws = :pws");
+            query.setParameter("email", email);
+            query.setParameter("pws", pws);
+            return (Funcionario) query.getSingleResult();
         } finally {
             em.close();
         }
