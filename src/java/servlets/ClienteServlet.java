@@ -27,7 +27,8 @@ public class ClienteServlet extends HttpServlet {
         String pagina = "index.jsp";
         String acao = request.getParameter("acao");
         String caminhoFoto = System.getProperty("user.home") + ""
-                + "/NetBeansProjects/lomoj/web/img/clientes/";
+                + "/Documents/NetBeansProjects/lomoj/web/img/clientes/";//windows
+                //+ "/NetBeansProjects/lomoj/web/img/clientes/";//linux
 
         //Cadastro
         if (acao.equals("cad")) {
