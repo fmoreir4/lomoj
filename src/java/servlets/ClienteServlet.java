@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Cliente;
 import util.Arquivo;
+import util.Crypt;
 
 @MultipartConfig
 @WebServlet(name = "ClienteServlet", urlPatterns = {"/Cliente"})
@@ -30,16 +33,17 @@ public class ClienteServlet extends HttpServlet {
                 + "/Documents/NetBeansProjects/lomoj/web/img/clientes/";//windows
                 //+ "/NetBeansProjects/lomoj/web/img/clientes/";//linux
 
-        //Cadastro
-        if (acao.equals("cad")) {
+        //Cadastro e Alteração
+        if (acao.equals("cad") || acao.equals("alt")) {
+             Cliente cliente = null;
             try {
-                Cliente cliente = new Cliente();
+                cliente = new Cliente();
                 CtrlCliente ctrlCliente = new CtrlCliente();
                 Arquivo arq = new Arquivo();
 
                 cliente.setNome(request.getParameter("nome"));
                 cliente.setEmail(request.getParameter("email"));
-                cliente.setPws(request.getParameter("pws"));
+                //cliente.setPws(request.getParameter("pws"));
                 cliente.setFoto(request.getPart("fotoperfil").getSubmittedFileName());
 
                 if (!request.getParameter("dataNasc").equals("")) {
@@ -49,17 +53,28 @@ public class ClienteServlet extends HttpServlet {
                     cal.setTime(sdf.parse(request.getParameter("dataNasc")));
                     cliente.setDataNasc(cal);
                 }
-
-                cliente.validar(request.getParameter("pwsc"));
-                
+                if(acao.equals("cad")){
+                    cliente.setPws(request.getParameter("pws"));
+                    cliente.validar(request.getParameter("pwsc"));
+                } else {
+                    cliente.setId(Long.parseLong(request.getParameter("id")));
+                    cliente.validar();
+                }
                 //Upload da Foto
                 cliente.setFoto(arq.upload(caminhoFoto,
                         request.getPart("fotoperfil").getSubmittedFileName(),
                         request.getPart("fotoperfil").getInputStream()));
-
-                ctrlCliente.cadastrar(cliente);
+                
+                if(acao.equals("cad")){
+                    cliente.setPws(Crypt.md5(cliente.getPws()));
+                    ctrlCliente.cadastrar(cliente);
+                } else {
+                    ctrlCliente.alterar(cliente);
+                }
+                
                 request.setAttribute("avisos", "Cadastrado");
             } catch (Exception ex) {
+                request.setAttribute("cliente", cliente);
                 request.setAttribute("erros", ex.getMessage().replace("\n", "<br>"));
             }
             pagina = "index.jsp?p=formCliente";
@@ -69,8 +84,8 @@ public class ClienteServlet extends HttpServlet {
         if (acao.equals("log")) {
             try {
                 CtrlCliente ctrlCliente = new CtrlCliente();
-                String email = request.getParameter("email");
-                String pws = request.getParameter("pws");
+                String email = request.getParameter("email").trim();
+                String pws = Crypt.md5(request.getParameter("pws").trim());
                 Cliente cliente = ctrlCliente.login(email, pws);
                 HttpSession user = request.getSession();
                 cliente.setPws("");
@@ -103,6 +118,20 @@ public class ClienteServlet extends HttpServlet {
             pagina = "admin.jsp?p=reportCliente";
         }
 
+        if(acao.equals("edit")){
+            long id = Long.parseLong(request.getParameter("id"));
+            CtrlCliente ctrlCliente = new CtrlCliente();
+            Cliente cliente;
+            try {
+                cliente = ctrlCliente.buscaID(id);
+                request.setAttribute("cliente", cliente);
+            } catch (Exception ex) {
+                request.setAttribute("erros", "Cliente não localizado.");
+            }
+            
+            pagina = "index.jsp?p=formCliente";
+        }
+        
         //Retorna para a página
         request.getRequestDispatcher(pagina).forward(request, response);
     }

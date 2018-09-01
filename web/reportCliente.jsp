@@ -24,7 +24,7 @@
             <td>${cliente.nome}</td>
             <td>${cliente.email}</td>
             <td><fmt:formatDate value="${cliente.dataNasc.time}" type="date"/></td>
-            <td>/</td>
+            <td><a href="Cliente?acao=edit&id=${cliente.id}">/</a></td>
             <td>X</td>
         </tr> 
     </c:forEach>

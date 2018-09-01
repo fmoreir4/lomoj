@@ -22,4 +22,14 @@ public class CtrlCliente {
         dao = new ClienteDAO();
         return dao.findClientes(dados);
     }
+
+    public Cliente buscaID(long id)throws Exception{
+       dao = new ClienteDAO();
+       return dao.findCliente(id);
+    }
+
+    public void alterar(Cliente cliente) throws Exception {
+       dao = new ClienteDAO();
+       dao.edit(cliente);
+    }
 }
