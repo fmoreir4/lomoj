@@ -1,5 +1,6 @@
 
-<form action="Func" method="post" enctype="multipart/form-data">   
+<form action="sys" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="logica" value="FuncionarioLog">
     <input type="hidden" name="acao" value="cad">
 
     <div class="form-group">

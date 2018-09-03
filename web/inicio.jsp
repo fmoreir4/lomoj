@@ -8,7 +8,7 @@
         <div class="col-md-3 produto"> 
             <a href="sys?logica=ProdutoLog&acao=desc&id=${produto.id}">
                 <div class="well">
-                    <img src="img/produtos/${produto.foto1}" title="${produto.foto1}" alt="${produto.descricao}" class="img-responsive">
+                    <img src="img/produtos/${produto.foto01}" title="${produto.foto01}" alt="${produto.descricao}" class="img-responsive">
                     <p class="nome">${produto.nome}</p>
                     <p class="descricao">${produto.descricao}</p>
                     <p class="valor">

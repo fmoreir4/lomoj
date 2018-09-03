@@ -77,7 +77,8 @@
             <c:if test="${empty funcionario}">
                 <%-- Login Funcionario --%>
                 <div class="row justify-content-center">
-                    <form method="post" action="Func" class="col-md-6">
+                    <form method="post" action="sys" class="col-md-6">
+                        <input type="hidden" name="logica" value="FuncionarioLog">
                         <input type="hidden" name="acao" value="log">
                         <h2 class="p-3 text-center"> login do funcionario</h2>
                         <div class="form-group py-3">

@@ -3,20 +3,20 @@
 <div class="row">
     <div class="col-md-6">
 	<div class="col-md-12">
-	    <c:if test="${not empty produto.foto1}">
-		<img src="img/produtos/${produto.foto1}" class="img-fluid">
+	    <c:if test="${not empty produto.foto01}">
+		<img src="img/produtos/${produto.foto01}" class="img-fluid">
 	    </c:if>
 	</div>
 	<div class="col-md-12">
 	    <div class="row">
 		<div class="col-md-6">
-		    <c:if test="${not empty produto.foto2}">
-			<img src="img/produtos/${produto.foto2}" class="img-thumbnail">
+		    <c:if test="${not empty produto.foto02}">
+			<img src="img/produtos/${produto.foto02}" class="img-thumbnail">
 		    </c:if>
 		</div>
 		<div class="col-md-6">
-		    <c:if test="${not empty produto.foto3}">
-			<img src="img/produtos/${produto.foto3}" class="img-thumbnail">
+		    <c:if test="${not empty produto.foto03}">
+			<img src="img/produtos/${produto.foto03}" class="img-thumbnail">
 		    </c:if>
 		</div>
 	    </div>

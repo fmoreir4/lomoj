@@ -1,8 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row justify-content-center">
 
-    <form method="post" action="Cliente" class="col-md-6">
-
+    <form method="post" action="sys" class="col-md-6">
+        <input type="hidden" name="logica" value="ClienteLog">
         <input type="hidden" name="acao" value="log">
 
         <h2 class="p-3 text-center"> login do cliente</h2>

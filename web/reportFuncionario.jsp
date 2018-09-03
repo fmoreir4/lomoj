@@ -1,8 +1,9 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<form action="Func" method="get" class="form">
-     <h2> Pesquisa de Funcionário </h2>
+<form action="sys" method="get" class="form">
+    <h2> Pesquisa de Funcionário </h2>
+    <input type="hidden" name="logica" value="FuncionarioLog">
     <input type="hidden" name="acao" value="pesq">
     <div class="form-group">
         <label for=""> Pesquisar </label>
