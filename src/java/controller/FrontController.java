@@ -23,7 +23,7 @@ public class FrontController extends HttpServlet {
 	response.setContentType("text/html;charset=UTF-8");
 	request.setCharacterEncoding("UTF-8");
 
-	String caminho = "br.com.lojaweb.logica.";
+	String caminho = "logica.";
 	String parametro = caminho + request.getParameter("logica");
 	String nomeDaClasse = parametro;
 	try {

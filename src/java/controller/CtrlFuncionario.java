@@ -12,6 +12,11 @@ public class CtrlFuncionario {
         dao = new FuncionarioDAO();
         dao.create(funcionario);
     }
+    
+    public void alterar(Funcionario funcionario) throws Exception {
+        dao = new FuncionarioDAO();
+        dao.edit(funcionario);
+    }
 
     public Funcionario login(String email, String senha) throws Exception {
         dao = new FuncionarioDAO();

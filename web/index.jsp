@@ -52,6 +52,9 @@
                             <a class="nav-link" href="index.jsp?p=login">Login</a>
                         </li>
                     </c:if>
+                    <li class="nav-item">
+                        <a class="nav-link" href="?p=carrinho">Carrinho <span class="badge badge-pill badge-secondary ">${sessionScope.itens.size()} </span></a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -82,6 +85,9 @@
         <section class="container">
             <c:if test="${not empty param.p}">
                 <c:import url="${param.p}.jsp"/>
+            </c:if>
+            <c:if test="${empty param.p}">
+                <c:import url="inicio.jsp"/>
             </c:if>
         </section>
 

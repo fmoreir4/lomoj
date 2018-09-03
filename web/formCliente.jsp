@@ -1,14 +1,14 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<form action="Cliente" method="post" enctype="multipart/form-data">
+<form action="sys" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="logica" value="ClienteLog">
     <c:if test="${empty cliente.id}">
         <input type="hidden" name="acao" value="cad">
     </c:if>
     <c:if test="${not empty cliente.id}">
         <input type="hidden" name="acao" value="alt">
         <input type="hidden" name="id" value="${cliente.id}">
-        ${cliente.id}
     </c:if>
 
     <div class="form-group">
