@@ -1,4 +1,4 @@
-package servlets;
+package logica;
 
 import controller.CtrlFuncionario;
 import java.io.IOException;

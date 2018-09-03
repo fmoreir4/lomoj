@@ -1,4 +1,4 @@
-package servlets;
+package logica;
 
 import controller.CtrlProduto;
 import java.io.IOException;
