@@ -8,6 +8,7 @@
     <c:if test="${not empty cliente.id}">
         <input type="hidden" name="acao" value="alt">
         <input type="hidden" name="id" value="${cliente.id}">
+        ${cliente.id}
     </c:if>
 
     <div class="form-group">
@@ -27,7 +28,7 @@
 
     <div class="form-group">
         <label for=""></label>
-        <input type="text" class="form-control" name="dataNasc" placeholder="Data de Nascimento (dd/mm/aaaa)" id="datepicker" value="${cliente.dataNasc.time}">
+        <input type="text" class="form-control" name="dataNasc" placeholder="Data de Nascimento (dd/mm/aaaa)" id="datepicker" value="<fmt:formatDate value="${cliente.dataNasc.time}" type="date" pattern = "dd/MM/yyyy"/>">
     </div>
 
     <div class="form-check">

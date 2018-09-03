@@ -31,11 +31,11 @@ public class ClienteServlet extends HttpServlet {
         String acao = request.getParameter("acao");
         String caminhoFoto = System.getProperty("user.home") + ""
                 + "/Documents/NetBeansProjects/lomoj/web/img/clientes/";//windows
-                //+ "/NetBeansProjects/lomoj/web/img/clientes/";//linux
+        //+ "/NetBeansProjects/lomoj/web/img/clientes/";//linux
 
         //Cadastro e Alteração
         if (acao.equals("cad") || acao.equals("alt")) {
-             Cliente cliente = null;
+            Cliente cliente = null;
             try {
                 cliente = new Cliente();
                 CtrlCliente ctrlCliente = new CtrlCliente();
@@ -53,30 +53,32 @@ public class ClienteServlet extends HttpServlet {
                     cal.setTime(sdf.parse(request.getParameter("dataNasc")));
                     cliente.setDataNasc(cal);
                 }
-                if(acao.equals("cad")){
+
+                if (acao.equals("cad")) {
                     cliente.setPws(request.getParameter("pws"));
                     cliente.validar(request.getParameter("pwsc"));
                 } else {
                     cliente.setId(Long.parseLong(request.getParameter("id")));
                     cliente.validar();
                 }
+
                 //Upload da Foto
                 cliente.setFoto(arq.upload(caminhoFoto,
                         request.getPart("fotoperfil").getSubmittedFileName(),
                         request.getPart("fotoperfil").getInputStream()));
-                
-                if(acao.equals("cad")){
+                if (acao.equals("cad")) {
                     cliente.setPws(Crypt.md5(cliente.getPws()));
                     ctrlCliente.cadastrar(cliente);
                 } else {
                     ctrlCliente.alterar(cliente);
                 }
-                
+
                 request.setAttribute("avisos", "Cadastrado");
+                cliente = null;
             } catch (Exception ex) {
-                request.setAttribute("cliente", cliente);
                 request.setAttribute("erros", ex.getMessage().replace("\n", "<br>"));
             }
+            request.setAttribute("cliente", cliente);
             pagina = "index.jsp?p=formCliente";
         }
 
@@ -118,7 +120,7 @@ public class ClienteServlet extends HttpServlet {
             pagina = "admin.jsp?p=reportCliente";
         }
 
-        if(acao.equals("edit")){
+        if (acao.equals("edit")) {
             long id = Long.parseLong(request.getParameter("id"));
             CtrlCliente ctrlCliente = new CtrlCliente();
             Cliente cliente;
@@ -128,10 +130,10 @@ public class ClienteServlet extends HttpServlet {
             } catch (Exception ex) {
                 request.setAttribute("erros", "Cliente não localizado.");
             }
-            
+
             pagina = "index.jsp?p=formCliente";
         }
-        
+
         //Retorna para a página
         request.getRequestDispatcher(pagina).forward(request, response);
     }

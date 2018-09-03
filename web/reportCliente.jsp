@@ -23,7 +23,7 @@
             <td>${cliente.foto}</td>
             <td>${cliente.nome}</td>
             <td>${cliente.email}</td>
-            <td><fmt:formatDate value="${cliente.dataNasc.time}" type="date"/></td>
+            <td><fmt:formatDate value="${cliente.dataNasc.time}" type="date" pattern = "dd/MM/yyyy"/></td>
             <td><a href="Cliente?acao=edit&id=${cliente.id}">/</a></td>
             <td>X</td>
         </tr> 
