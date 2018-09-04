@@ -12,10 +12,15 @@ public class CtrlProduto {
         dao = new ProdutoDAO();
         dao.create(produto);
     }
-    
-     public List<Produto> pesquisar(String dados) throws Exception {
+
+    public List<Produto> pesquisar(String dados) throws Exception {
         dao = new ProdutoDAO();
         return dao.findProdutos(dados);
+    }
+
+    public Produto buscaID(long id) throws Exception {
+        dao = new ProdutoDAO();
+        return dao.findProduto(id);
     }
 
 }

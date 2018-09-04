@@ -9,9 +9,9 @@ import model.Produto;
 
 @MultipartConfig
 //@WebServlet(name = "ProdutoServlet", urlPatterns = {"/Produto"})
-public class ProdutoLog implements Logica{
+public class ProdutoLog implements Logica {
 
-   public String executa(HttpServletRequest request, HttpServletResponse response)
+    public String executa(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         response.setContentType("text/html;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -52,8 +52,8 @@ public class ProdutoLog implements Logica{
             }
             pagina = "admin.jsp?p=formProduto";
         }
-        
-          //Pesquisar
+
+        //Pesquisar
         if (acao.equals("pesq")) {
             CtrlProduto ctrlProduto = new CtrlProduto();
             String dados = request.getParameter("dados").trim();
@@ -66,6 +66,19 @@ public class ProdutoLog implements Logica{
             pagina = "admin.jsp?p=reportProduto";
         }
 
+        //Busca por ID
+        if (acao.equals("desc")) {
+            CtrlProduto ctrlProduto = new CtrlProduto();
+            long id = Long.parseLong(request.getParameter("id"));
+            try {
+                Produto produto = ctrlProduto.buscaID(id);
+                request.setAttribute("produto", produto);
+                pagina = "index.jsp?p=descProduto";
+            } catch (Exception ex) {
+                request.setAttribute("erros", "Produto não encontrados.");
+                pagina = "index.jsp";
+            }
+        }
 
         //Retorna para a página
         return pagina;
