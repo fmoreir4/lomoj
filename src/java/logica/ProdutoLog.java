@@ -66,7 +66,7 @@ public class ProdutoLog implements Logica {
                             request.getPart("foto02").getInputStream()));
                 }
                 if (!produto.getFoto03().equals("")) {
-                    produto.setFoto02(arq.upload(caminhoFoto,
+                    produto.setFoto03(arq.upload(caminhoFoto,
                             request.getPart("foto03").getSubmittedFileName(),
                             request.getPart("foto03").getInputStream()));
                 }

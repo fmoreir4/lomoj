@@ -43,7 +43,7 @@
                                     <a class="nav-link">${funcionario.nome}</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="Func?acao=off">Sair</a>
+                                    <a class="nav-link" href="sys?logica=FuncionarioLog&acao=off">Sair</a>
                                 </li>
                             </ul>
                         </c:if> 
