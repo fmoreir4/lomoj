@@ -114,7 +114,7 @@ public class ClienteDAO extends ConectaJPA {
         try {
             Query query = em.createQuery(""
                     + "select x from Cliente as x "
-                    + "where x.email = :email and x.pws = :pws");
+                    + "where x.email = :email and x.pws = :pws and x.ativo = 1");
             query.setParameter("email", email);
             query.setParameter("pws", pws);
             return (Cliente) query.getSingleResult();

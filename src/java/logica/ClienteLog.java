@@ -14,7 +14,7 @@ import util.Crypt;
 
 @MultipartConfig
 //@WebServlet(name = "ClienteServlet", urlPatterns = {"/Cliente"})
-public class ClienteLog implements Logica{
+public class ClienteLog implements Logica {
 
     public String executa(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
@@ -29,28 +29,35 @@ public class ClienteLog implements Logica{
 
         //Cadastro e Alteração
         if (acao.equals("cad") || acao.equals("alt")) {
-            Cliente cliente = null;
+            Cliente cliente = new Cliente();
             try {
-                cliente = new Cliente();
                 CtrlCliente ctrlCliente = new CtrlCliente();
                 Arquivo arq = new Arquivo();
 
-                cliente.setNome(request.getParameter("nome"));
-                cliente.setEmail(request.getParameter("email"));
+                cliente.setNome(request.getParameter("nome").trim());
+                cliente.setEmail(request.getParameter("email").trim());
                 //cliente.setPws(request.getParameter("pws"));
                 cliente.setFoto(request.getPart("fotoperfil").getSubmittedFileName());
 
+                if (request.getParameter("ativo").equals("1")) {
+                    cliente.setAtivo(true);
+                } else {
+                    cliente.setAtivo(false);
+                }
+
+                //Data de Nascimento
                 if (!request.getParameter("dataNasc").equals("")) {
                     //String para Data(Calendar)
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     Calendar cal = Calendar.getInstance();
-                    cal.setTime(sdf.parse(request.getParameter("dataNasc")));
+                    cal.setTime(sdf.parse(request.getParameter("dataNasc").trim()));
                     cliente.setDataNasc(cal);
                 }
 
+                //Validação dos dados
                 if (acao.equals("cad")) {
-                    cliente.setPws(request.getParameter("pws"));
-                    cliente.validar(request.getParameter("pwsc"));
+                    cliente.setPws(request.getParameter("pws").trim());
+                    cliente.validar(request.getParameter("pwsc").trim());
                 } else {
                     cliente.setId(Long.parseLong(request.getParameter("id")));
                     cliente.validar();
@@ -60,14 +67,17 @@ public class ClienteLog implements Logica{
                 cliente.setFoto(arq.upload(caminhoFoto,
                         request.getPart("fotoperfil").getSubmittedFileName(),
                         request.getPart("fotoperfil").getInputStream()));
+
+                //Cadastra ou altera no banco
                 if (acao.equals("cad")) {
                     cliente.setPws(Crypt.md5(cliente.getPws()));
                     ctrlCliente.cadastrar(cliente);
+                    request.setAttribute("avisos", "Cadastrado");
                 } else {
                     ctrlCliente.alterar(cliente);
+                    request.setAttribute("avisos", "Alterado");
                 }
-
-                request.setAttribute("avisos", "Cadastrado");
+                //limpa o cliente
                 cliente = null;
             } catch (Exception ex) {
                 request.setAttribute("erros", ex.getMessage().replace("\n", "<br>"));
@@ -129,7 +139,7 @@ public class ClienteLog implements Logica{
         }
 
         //Retorna para a página
-       return pagina;
+        return pagina;
     }
 
 }

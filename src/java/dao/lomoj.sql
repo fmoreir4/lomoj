@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 31-Ago-2018 às 23:31
+-- Generation Time: 05-Set-2018 às 23:56
 -- Versão do servidor: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -21,8 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `lomoj`
 --
-CREATE DATABASE IF NOT EXISTS `lomoj` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `lomoj`;
 
 -- --------------------------------------------------------
 
@@ -45,7 +43,7 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`ID`, `ATIVO`, `DATANASC`, `EMAIL`, `FOTO`, `NOME`, `PWS`) VALUES
-(1, 1, '2018-08-05', 'ana@ana.com', '87d07f90f10c40ed8075f45c042fe6f6.jpg', 'Ana', '111111');
+(1, 1, '2018-09-02', 'ana@ana.com', '453859528b76397a5a12a9d2f36ba702.jpg', 'Ana Silva', '96e79218965eb72c92a549dd5a330112');
 
 -- --------------------------------------------------------
 
@@ -68,7 +66,7 @@ CREATE TABLE `funcionario` (
 --
 
 INSERT INTO `funcionario` (`ID`, `ATIVO`, `CARGO`, `EMAIL`, `FOTO`, `NOME`, `PWS`) VALUES
-(1, 1, NULL, 'admin@admin', 'Chrysanthemum.jpg', 'admin', '111111');
+(1, 1, NULL, 'admin@admin', '453859528b76397a5a12a9d2f36ba702.jpg', 'admin', '96e79218965eb72c92a549dd5a330112');
 
 -- --------------------------------------------------------
 

@@ -6,6 +6,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Produto;
+import util.Arquivo;
 
 @MultipartConfig
 //@WebServlet(name = "ProdutoServlet", urlPatterns = {"/Produto"})
@@ -18,12 +19,17 @@ public class ProdutoLog implements Logica {
 
         String pagina = "index.jsp";
         String acao = request.getParameter("acao");
+        String caminhoFoto = System.getProperty("user.home") + ""
+                + "/Documents/NetBeansProjects/lomoj/web/img/produtos/";//windows
+        //+ "/NetBeansProjects/lomoj/web/img/produtos/";//linux
 
         //Cadastro
         if (acao.equals("cad")) {
             try {
                 Produto produto = new Produto();
                 CtrlProduto ctrlProduto = new CtrlProduto();
+                Arquivo arq = new Arquivo();
+
                 produto.setNome(request.getParameter("nome"));
                 produto.setDescricao(request.getParameter("descricao"));
 
@@ -38,13 +44,34 @@ public class ProdutoLog implements Logica {
                 produto.setFoto01(request.getPart("foto01").getSubmittedFileName());
                 produto.setFoto02(request.getPart("foto02").getSubmittedFileName());
                 produto.setFoto03(request.getPart("foto03").getSubmittedFileName());
+
                 if (request.getParameter("ativo").equals("1")) {
                     produto.setAtivo(true);
                 } else {
                     produto.setAtivo(false);
                 }
 
+                //Validação
                 produto.validar();
+
+                //Upload da Fotos
+                if (!produto.getFoto01().equals("")) {
+                    produto.setFoto01(arq.upload(caminhoFoto,
+                            request.getPart("foto01").getSubmittedFileName(),
+                            request.getPart("foto01").getInputStream()));
+                }
+                if (!produto.getFoto02().equals("")) {
+                    produto.setFoto02(arq.upload(caminhoFoto,
+                            request.getPart("foto02").getSubmittedFileName(),
+                            request.getPart("foto02").getInputStream()));
+                }
+                if (!produto.getFoto03().equals("")) {
+                    produto.setFoto02(arq.upload(caminhoFoto,
+                            request.getPart("foto03").getSubmittedFileName(),
+                            request.getPart("foto03").getInputStream()));
+                }
+
+                //Cadastra o produto
                 ctrlProduto.cadastrar(produto);
                 request.setAttribute("avisos", "Cadastrado");
             } catch (Exception ex) {
