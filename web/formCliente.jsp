@@ -37,6 +37,7 @@
     <div class="form-check">
         <input type="radio" class="form-check-input" name="ativo" value="0"><label class="form-check-label">Bloqueado</label>
     </div>
+    
     <c:if test="${empty cliente.id}">
         <div class="form-group">
             <label for=""></label>
@@ -48,6 +49,7 @@
             <input type="password" class="form-control" name="pwsc" placeholder="Confirmação de senha">
         </div>
     </c:if>
+    
     <div class="form-group text-right">
         <button type="submit" class="btn btn-primary">Salvar</button>
         <button type="reset" class="btn btn-primary">Cancelar</button>

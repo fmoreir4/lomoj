@@ -31,10 +31,16 @@ public class FuncionarioLog implements Logica {
             try {
                 CtrlFuncionario ctrlFuncionario = new CtrlFuncionario();
                 Arquivo arq = new Arquivo();
-                funcionario.setNome(request.getParameter("nome"));
-                funcionario.setEmail(request.getParameter("email"));
-                funcionario.setPws(request.getParameter("pws"));
+                funcionario.setNome(request.getParameter("nome").trim());
+                funcionario.setEmail(request.getParameter("email").trim());
+                funcionario.setPws(request.getParameter("pws").trim());
                 funcionario.setFoto(request.getPart("fotoperfil").getSubmittedFileName());
+
+                if (request.getParameter("ativo").equals("1")) {
+                    funcionario.setAtivo(true);
+                } else {
+                    funcionario.setAtivo(false);
+                }
 
                 //Upload da Foto
                 funcionario.setFoto(arq.upload(caminhoFoto,
@@ -42,9 +48,11 @@ public class FuncionarioLog implements Logica {
                         request.getPart("fotoperfil").getInputStream()));
 
                 if (acao.equals("cad")) {
+                    funcionario.validar(request.getParameter("pwsc").trim());
                     funcionario.setPws(Crypt.md5(funcionario.getPws()));
                     ctrlFuncionario.cadastrar(funcionario);
                 } else {
+                    funcionario.validar();
                     ctrlFuncionario.alterar(funcionario);
                 }
                 funcionario = null;
@@ -60,8 +68,9 @@ public class FuncionarioLog implements Logica {
         if (acao.equals("log")) {
             try {
                 CtrlFuncionario ctrlFuncionario = new CtrlFuncionario();
-                String email = request.getParameter("email");
-                String pws = request.getParameter("pws");
+                String email = request.getParameter("email").trim();
+                String pws = Crypt.md5(request.getParameter("pws").trim());
+                System.out.println("senha:" + Crypt.md5("pws"));
                 Funcionario funcionario = ctrlFuncionario.login(email, pws);
                 HttpSession user = request.getSession();
                 funcionario.setPws("");

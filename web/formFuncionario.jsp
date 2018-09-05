@@ -29,7 +29,7 @@
     <div class="form-group">
         <label for="exampleFormControlSelect1">Cargo</label>
         <select class="form-control" id="exampleFormControlSelect1">
-            <option>Admin</option>
+            <option>Administrador</option>
             <option>Gerente</option>
             <option>Vendedor</option>
             <option>Atendente</option>
