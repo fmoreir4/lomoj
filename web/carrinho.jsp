@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<style>.produtopq{max-width: 50px}</style>
+
 <h2> Meu carrinho </h2> 
 <form action="sys" method="post" id="carrinho">
     <input type="hidden" name="logica" value="Carrinho">
@@ -33,7 +35,7 @@
                 <tr>
                     <td class=""> 
                         <div class="col-6">
-                            <img src="img/produtos/${i.produto.foto1}" title="" alt="" class="img-responsive produtopq">
+                            <img src="img/produtos/${i.produto.foto01}" title="" alt="" class="img-fluid produtopq">
                         </div>
                         <div class="col-6">${i.produto.nome}</div>
                     </td>
