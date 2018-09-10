@@ -53,7 +53,7 @@
                         </li>
                     </c:if>
                     <li class="nav-item">
-                        <a class="nav-link" href="?p=carrinho">Carrinho <span class="badge badge-pill badge-secondary ">${sessionScope.itens.size()} </span></a>
+                        <a class="nav-link" href="index.jsp?p=carrinho">Carrinho <span class="badge badge-pill badge-secondary ">${sessionScope.itens.size()} </span></a>
                     </li>
                 </ul>
             </div>

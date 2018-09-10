@@ -23,9 +23,9 @@
             <td>${produto.id}</td>
             <td>${produto.nome}</td>
             <td>${produto.descricao}</td>
-            <td>${produto.foto01}</td>
-            <td>${produto.foto02}</td>
-            <td>${produto.foto03}</td>
+            <td><img src="img/produtos/${produto.foto01}" class="img-fluid"></td>
+            <td><img src="img/produtos/${produto.foto02}" class="img-fluid"></td>
+            <td><img src="img/produtos/${produto.foto03}" class="img-fluid"></td>
             <td>${produto.quant}</td>
             <td>${produto.valor}</td>
             <td>/</td>
