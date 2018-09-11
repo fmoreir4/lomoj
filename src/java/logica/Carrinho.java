@@ -40,8 +40,29 @@ public class Carrinho implements Logica {
             if (itens == null) {
                 itens = new ArrayList<>();
             }
-            itens.add(item);
+            int cont = 0;
+            for (Item i : itens) {
+                if (i.getProduto().equals(item.getProduto())) {
+                    cont++;
+                }
+            }
+            if (cont == 0) {
+                itens.add(item);
+            }
+
             carrinho.setAttribute("itens", itens);
+
+            pagina = "index.jsp?p=carrinho";
+        }
+
+        if (acao.equals("remove")) {
+            int index = Integer.parseInt(request.getParameter("index"));
+            List<Item> itens = (List<Item>) carrinho.getAttribute("itens");
+            //remove o item se o carrinho não estiver vazio
+            if (!itens.isEmpty()) {
+                itens.remove(index);
+                carrinho.setAttribute("itens", itens);
+            }
             pagina = "index.jsp?p=carrinho";
         }
 
