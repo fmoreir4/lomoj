@@ -1,4 +1,4 @@
-package br.com.lojaweb.util;
+package util;
 
 import java.sql.Date;
 import java.text.DateFormat;

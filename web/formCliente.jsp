@@ -13,22 +13,22 @@
 
     <div class="form-group">
         <label for=""></label>
-        <input type="file" class="form-control" name="fotoperfil" placeholder="Foto perfil" value="${cliente.foto}">
+        <input type="file" class="form-control" name="fotoperfil" placeholder="Foto perfil" value="${cliente.foto} />
     </div>
 
     <div class="form-group">
         <label for=""></label>
-        <input type="text" class="form-control" name="nome" placeholder="Nome" value="${cliente.nome}">
+        <input type="text" class="form-control" name="nome" placeholder="Nome" value="${cliente.nome}" />
     </div>
 
     <div class="form-group">
         <label for=""></label>
-        <input type="email" class="form-control" name="email" placeholder="E-mail" value="${cliente.email}">
+        <input type="email" class="form-control" name="email" placeholder="E-mail" value="${cliente.email}" />
     </div>
 
     <div class="form-group">
         <label for=""></label>
-        <input type="text" class="form-control" name="dataNasc" placeholder="Data de Nascimento (dd/mm/aaaa)" id="datepicker" value="<fmt:formatDate value="${cliente.dataNasc.time}" type="date" pattern = "dd/MM/yyyy"/>">
+        <input type="text" class="form-control" name="dataNasc" placeholder="Data de Nascimento (dd/mm/aaaa)" id="datepicker" value="<fmt:formatDate value='${cliente.dataNasc.time}' type='date' pattern = 'dd/MM/yyyy'/>" />
     </div>
     <div class="form-group">
         <div class="form-check">
@@ -41,48 +41,48 @@
     <!-- Endereco -->
     <div class="form-group">
         <label for="numero">Numero</label>
-        <input type="text" name="numero" class="form-control" value="${cliente.numero}">
+        <input type="text" name="numero" class="form-control" value="${cliente.numero}" />
     </div>
 
     <div class="form-group">
         <label for="complemento">Complemento</label>
-        <input type="text" name="complemento" class="form-control" value="${cliente.complemento}">
+        <input type="text" name="complemento" class="form-control" value="${cliente.complemento}" />
     </div>
 
     <div class="form-group">
         <label for="cep">CEP</label><span id="mensagem"></span>
-        <input type="text" name="cep" class="form-control"  maxlength="9" value="${cliente.endereco.cep}" id="cep">
+        <input type="text" name="cep" class="form-control"  maxlength="9" value="${cliente.endereco.cep}" id="cep" />
     </div>
 
     <div class="form-group">
         <label for="logradouro">Endereço</label>
-        <input type="text" name="logradouro" maxlength="" class="form-control" value="${cliente.endereco.logradouro}" id="rua">
+        <input type="text" name="logradouro" maxlength="" class="form-control" value="${cliente.endereco.logradouro}" id="rua" />
     </div>
 
     <div class="form-group">
         <label for="bairro">Bairro</label>
-        <input type="text" name="bairro" maxlength="" class="form-control" value="${cliente.endereco.bairro}" id="bairro">
+        <input type="text" name="bairro" maxlength="" class="form-control" value="${cliente.endereco.bairro}" id="bairro" />
     </div>
 
     <div class="form-group">
         <label for="cidade">Cidade</label>
-        <input type="text" name="cidade" maxlength="" class="form-control" value="${cliente.endereco.cidade}" id="cidade">
+        <input type="text" name="cidade" maxlength="" class="form-control" value="${cliente.endereco.cidade}" id="cidade" />
     </div>
 
     <div class="form-group">
         <label for="uf">Estado</label>
-        <input type="text" name="uf" maxlength="2" class="form-control" value="${cliente.endereco.uf}" id="uf">
+        <input type="text" name="uf" maxlength="2" class="form-control" value="${cliente.endereco.uf}" id="uf" />
     </div>
 
     <c:if test="${empty cliente.id}">
         <div class="form-group">
             <label for=""></label>
-            <input type="password" class="form-control" name="pws" placeholder="Senha">
+            <input type="password" class="form-control" name="pws" placeholder="Senha" />
         </div>
 
         <div class="form-group">
             <label for=""></label>
-            <input type="password" class="form-control" name="pwsc" placeholder="Confirmação de senha">
+            <input type="password" class="form-control" name="pwsc" placeholder="Confirmação de senha" />
         </div>
     </c:if>
 

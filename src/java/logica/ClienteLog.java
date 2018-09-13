@@ -22,10 +22,10 @@ public class ClienteLog implements Logica {
         response.setCharacterEncoding("UTF-8");
 
         String pagina = "index.jsp";
-        String acao = request.getParameter("acao");
+        String acao = request.getParameter("acao").trim();
         String caminhoFoto = System.getProperty("user.home") + ""
-                + "/Documents/NetBeansProjects/lomoj/web/img/clientes/";//windows
-        //+ "/NetBeansProjects/lomoj/web/img/clientes/";//linux
+                //+ "/Documents/NetBeansProjects/lomoj/web/img/clientes/";//windows
+                + "/NetBeansProjects/lomoj/web/img/clientes/";//linux
 
         //Cadastro e Alteração
         if (acao.equals("cad") || acao.equals("alt")) {
@@ -145,8 +145,9 @@ public class ClienteLog implements Logica {
 
             pagina = "index.jsp?p=formCliente";
         }
-
-        if (request.getParameter("action").equals("rem")) {
+        
+        //Remover ou Apagar
+        if (acao.equals("rem")) {
             CtrlCliente ctrlCliente = new CtrlCliente();
             try {
                 ctrlCliente.remover(Long.parseLong(request.getParameter("id")));

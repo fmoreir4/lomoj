@@ -1,26 +1,26 @@
 package controller;
 
-import dao.ProdutoDAO;
+import dao.PedidoDAO;
 import java.util.List;
-import model.Produto;
+import model.Pedido;
 
 public class CtrlPedido {
 
-    ProdutoDAO dao = null;
+    PedidoDAO dao = null;
 
-    public void cadastrar(Produto produto) throws Exception {
-        dao = new ProdutoDAO();
-        dao.create(produto);
+    public void cadastrar(Pedido pedido) throws Exception {
+        dao = new PedidoDAO();
+        dao.create(pedido);
     }
 
-    public List<Produto> pesquisar(String dados) throws Exception {
-        dao = new ProdutoDAO();
-        return dao.findProdutos(dados);
+    public List<Pedido> pesquisar(String dados) throws Exception {
+        dao = new PedidoDAO();
+        return dao.findPedidos(dados);
     }
 
-    public Produto buscaID(long id) throws Exception {
-        dao = new ProdutoDAO();
-        return dao.findProduto(id);
+    public Pedido buscaID(long id) throws Exception {
+        dao = new PedidoDAO();
+        return dao.findPedido(id);
     }
 
 }

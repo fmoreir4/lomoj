@@ -22,8 +22,8 @@ public class FuncionarioLog implements Logica {
         String pagina = "admin.jsp";
         String acao = request.getParameter("acao");
         String caminhoFoto = System.getProperty("user.home") + ""
-                + "/Documents/NetBeansProjects/lomoj/web/img/func/";//windows
-        //+ "/NetBeansProjects/lomoj/web/img/func/";//linux
+                //+ "/Documents/NetBeansProjects/lomoj/web/img/func/";//windows
+                + "/NetBeansProjects/lomoj/web/img/func/";//linux
 
         //Cadastro e Alteração
         if (acao.equals("cad") || acao.equals("alt")) {

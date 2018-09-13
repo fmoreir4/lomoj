@@ -20,8 +20,8 @@ public class ProdutoLog implements Logica {
         String pagina = "index.jsp";
         String acao = request.getParameter("acao");
         String caminhoFoto = System.getProperty("user.home") + ""
-                + "/Documents/NetBeansProjects/lomoj/web/img/produtos/";//windows
-        //+ "/NetBeansProjects/lomoj/web/img/produtos/";//linux
+                //+ "/Documents/NetBeansProjects/lomoj/web/img/produtos/";//windows
+                + "/NetBeansProjects/lomoj/web/img/produtos/";//linux
 
         //Cadastro
         if (acao.equals("cad")) {

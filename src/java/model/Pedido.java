@@ -2,10 +2,12 @@ package model;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -17,7 +19,7 @@ public class Pedido implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     public Long getId() {
@@ -27,7 +29,7 @@ public class Pedido implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -52,20 +54,24 @@ public class Pedido implements Serializable {
     public String toString() {
         return "model.Pedido[ id=" + id + " ]";
     }
-    
-    
+
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Calendar dataPedido;
-    
+
     private double valor;
     private double frete;
     private double total;
-    
-    private boolean fechado = false;
-    private boolean pago = false;
-    
+
+    @Column(nullable = false)
+    private boolean fechado;
+
+    @Column(nullable = false)
+    private boolean pago;
+
+    @OneToOne
     private Cliente cliente;
 
+    //Gets e Sets
     public Calendar getDataPedido() {
         return dataPedido;
     }
@@ -94,8 +100,8 @@ public class Pedido implements Serializable {
         return total;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setTotal() {
+        this.total = valor + frete;
     }
 
     public boolean isFechado() {
@@ -121,6 +127,5 @@ public class Pedido implements Serializable {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    
-    
+
 }

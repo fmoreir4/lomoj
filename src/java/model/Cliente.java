@@ -163,27 +163,27 @@ public class Cliente implements Serializable {
         String erros = "";
 
         if (foto.equals("")) {
-            erros += "Foto do perfil em branco.\n";
+            erros += "Foto do perfil em branco. \n";
         }
 
         if (nome.equals("")) {
-            erros += "Nome em branco.\n";
+            erros += "Nome em branco. \n";
         }
 
         if (email.equals("")) {
             erros += "E-mail em branco.\n";
         } else if (email.length() < 5) {
-            erros += "E-mail invalido. E-mail muito curto.\n";
+            erros += "E-mail invalido. E-mail muito curto. \n";
         } else if ((!email.contains("@")) || (email.indexOf(".") == -1)) {
-            erros += "E-mail invalido\n";
+            erros += "E-mail invalido. \n";
         }
 
         if (numero.equals("")) {
-            erros += "Numero em branco.\n";
+            erros += "Numero em branco. \n";
         }
 
         if (dataNasc == null) {
-            erros += "Data de nascimento invalida ou em branco.\n";
+            erros += "Data de nascimento invalida ou em branco. \n";
         }
 
         return erros + endereco.validar();

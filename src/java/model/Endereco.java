@@ -19,65 +19,65 @@ public class Endereco implements Serializable {
     private String uf;
 
     public String getCep() {
-	return cep;
+        return cep;
     }
 
     public void setCep(String cep) {
-	this.cep = cep;
+        this.cep = cep;
     }
 
     public String getLogradouro() {
-	return logradouro;
+        return logradouro;
     }
 
     public void setLogradouro(String logradouro) {
-	this.logradouro = logradouro;
+        this.logradouro = logradouro;
     }
 
     public String getBairro() {
-	return bairro;
+        return bairro;
     }
 
     public void setBairro(String bairro) {
-	this.bairro = bairro;
+        this.bairro = bairro;
     }
 
     public String getCidade() {
-	return cidade;
+        return cidade;
     }
 
     public void setCidade(String cidade) {
-	this.cidade = cidade;
+        this.cidade = cidade;
     }
 
     public String getUf() {
-	return uf;
+        return uf;
     }
 
     public void setUf(String uf) {
-	this.uf = uf;
+        this.uf = uf;
     }
 
     //Validação
     public String validar() {
-	String erros = "";
-	if (cep.equals("")) {
-	    erros += "CEP em branco.\n";
-	}
-	if (logradouro.equals("")) {
-	    erros += "Logradouro em branco.\n";
-	}
-	if (bairro.equals("")) {
-	    erros += "Bairro em branco.\n";
-	}
-	if (cidade.equals("")) {
-	    erros += "Cidade em branco.\n";
-	}
-	if (uf.equals("")) {
-	    erros += "Estado em branco.\n";
-	}
+        String erros = "";
+        if (cep.equals("")) {
+            erros += "CEP em branco. \n";
+        }
+        if (logradouro.equals("")) {
+            erros += "Logradouro em branco. \n";
+        }
+        if (bairro.equals("")) {
+            erros += "Bairro em branco. \n";
+        }
+        if (cidade.equals("")) {
+            erros += "Cidade em branco. \n";
+        }
+        if (uf.equals("")) {
+            erros += "Estado em branco. \n";
+        }
 
-	return erros;
+        return erros;
     }
 
 }
