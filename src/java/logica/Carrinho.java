@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Item;
+import model.Pedido;
 import model.Produto;
-import util.Arquivo;
 
 @MultipartConfig
 //@WebServlet(name = "ProdutoServlet", urlPatterns = {"/Produto"})
@@ -31,6 +31,8 @@ public class Carrinho implements Logica {
 
         HttpSession carrinho = request.getSession(false);
 
+        Pedido pedido = null;
+
         if (acao.equals("add")) {
             long id = Long.parseLong(request.getParameter("id"));
             Produto produto = ctrlProduto.buscaID(id);
@@ -47,6 +49,7 @@ public class Carrinho implements Logica {
                 }
             }
             if (cont == 0) {
+                item.setValorItens();
                 itens.add(item);
             }
 
@@ -66,8 +69,28 @@ public class Carrinho implements Logica {
             pagina = "index.jsp?p=carrinho";
         }
 
+        if (acao.equals("calcular")) {
+            calcular(request, carrinho);
+            pagina = "index.jsp?p=carrinho";
+        }
+
         //Retorna para a página
         return pagina;
+    }
+
+    private void calcular(HttpServletRequest request, HttpSession carrinho) {
+        String quant[] = request.getParameterValues("quant");
+        List<Item> itens = (List<Item>) carrinho.getAttribute("itens");
+        double total = 0;
+        int index = 0;
+        for (Item i : itens) {
+            i.setQuant(Integer.parseInt(quant[index]));
+            i.setValorItens();
+            total += i.getValorItens();
+            index++;
+        }
+        carrinho.setAttribute("itens", itens);
+        carrinho.setAttribute("total", total);
     }
 
 }

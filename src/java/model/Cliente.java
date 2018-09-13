@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -25,19 +26,6 @@ public class Cliente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-
-    private String nome;
-
-    @Column(unique = true)
-    private String email;
-
-    private String pws;
-    private String foto;
-
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Calendar dataNasc;
-
-    private boolean ativo = true;
 
     @Override
     public int hashCode() {
@@ -64,54 +52,32 @@ public class Cliente implements Serializable {
         return "model.Cliente[ id=" + id + " ]";
     }
 
-    private String isDados() {
-        String erros = "";
+    private String nome;
 
-        if (foto.equals("")) {
-            erros += "Foto do perfil em branco.\n";
-        }
-        
-        if (nome.equals("")) {
-            erros += "Nome em branco.\n";
-        }
+    @Column(unique = true)
+    private String email;
 
-        if (email.equals("")) {
-            erros += "E-mail em branco.\n";
-        }
+    private String pws;
+    private String foto;
 
-        if (dataNasc == null) {
-            erros += "Data de nascimento invalida ou em branco.\n";
-        }
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Calendar dataNasc;
 
-        return erros;
+    private boolean ativo = true;
+    private String numero;
+    private String complemento;
+
+    //@Embedded
+    //@ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    private Endereco endereco;
+
+    //Construtor
+    public Cliente() {
+        this.endereco = new Endereco();
     }
 
-    private String isSenha(String confSenha) {
-        String erros = "";
-        if (pws.equals("")) {
-            erros += "Senha em branco.\n";
-        } else if (pws.length() < 6) {
-            erros += "Senha muito curta. Mínimo de 6 caracteres.\n";
-        } else if (!pws.equals(confSenha)) {
-            erros += "Senhas diferentes.\n";
-        }
-        return erros;
-    }
-
-    public void validar() throws Exception {
-        String erros = isDados();
-        if (!erros.equals("")) {
-            throw new Exception(erros);
-        }
-    }
-
-    public void validar(String confSenha) throws Exception {
-        String erros = isDados() + isSenha(confSenha);
-        if (!erros.equals("")) {
-            throw new Exception(erros);
-        }
-    }
-
+    //Gets e Sets
     public Calendar getDataNasc() {
         return dataNasc;
     }
@@ -167,4 +133,86 @@ public class Cliente implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    //Validações
+    private String isDados() {
+        String erros = "";
+
+        if (foto.equals("")) {
+            erros += "Foto do perfil em branco.\n";
+        }
+
+        if (nome.equals("")) {
+            erros += "Nome em branco.\n";
+        }
+
+        if (email.equals("")) {
+            erros += "E-mail em branco.\n";
+        } else if (email.length() < 5) {
+            erros += "E-mail invalido. E-mail muito curto.\n";
+        } else if ((!email.contains("@")) || (email.indexOf(".") == -1)) {
+            erros += "E-mail invalido\n";
+        }
+
+        if (numero.equals("")) {
+            erros += "Numero em branco.\n";
+        }
+
+        if (dataNasc == null) {
+            erros += "Data de nascimento invalida ou em branco.\n";
+        }
+
+        return erros + endereco.validar();
+    }
+
+    private String isSenha(String confSenha) {
+        String erros = "";
+        if (pws.equals("")) {
+            erros += "Senha em branco.\n";
+        } else if (pws.length() < 6) {
+            erros += "Senha muito curta. Mínimo de 6 caracteres.\n";
+        } else if (!pws.equals(confSenha)) {
+            erros += "Senhas diferentes.\n";
+        }
+        return erros;
+    }
+
+    public void validar() throws Exception {
+        String erros = isDados();
+        if (!erros.equals("")) {
+            throw new Exception(erros);
+        }
+    }
+
+    public void validar(String confSenha) throws Exception {
+        String erros = isDados() + isSenha(confSenha);
+        if (!erros.equals("")) {
+            throw new Exception(erros);
+        }
+    }
+
 }

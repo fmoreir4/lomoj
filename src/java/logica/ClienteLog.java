@@ -36,8 +36,14 @@ public class ClienteLog implements Logica {
 
                 cliente.setNome(request.getParameter("nome").trim());
                 cliente.setEmail(request.getParameter("email").trim());
-                //cliente.setPws(request.getParameter("pws"));
-                cliente.setFoto(request.getPart("fotoperfil").getSubmittedFileName());
+                cliente.setFoto(request.getPart("fotoperfil").getSubmittedFileName().trim());
+                cliente.setNumero(request.getParameter("numero").trim());
+                cliente.setComplemento(request.getParameter("complemento").trim());
+                cliente.getEndereco().setLogradouro(request.getParameter("logradouro").trim());
+                cliente.getEndereco().setBairro(request.getParameter("bairro").trim());
+                cliente.getEndereco().setCidade(request.getParameter("cidade").trim());
+                cliente.getEndereco().setUf(request.getParameter("uf").trim());
+                cliente.getEndereco().setCep(request.getParameter("cep").trim());
 
                 if (request.getParameter("ativo").equals("1")) {
                     cliente.setAtivo(true);
@@ -77,9 +83,11 @@ public class ClienteLog implements Logica {
                     ctrlCliente.alterar(cliente);
                     request.setAttribute("avisos", "Alterado");
                 }
+                
                 //limpa o cliente
                 cliente = null;
             } catch (Exception ex) {
+                System.err.println("Erro: " + ex.toString());
                 request.setAttribute("erros", ex.getMessage().replace("\n", "<br>"));
             }
             request.setAttribute("cliente", cliente);
@@ -136,6 +144,17 @@ public class ClienteLog implements Logica {
             }
 
             pagina = "index.jsp?p=formCliente";
+        }
+
+        if (request.getParameter("action").equals("rem")) {
+            CtrlCliente ctrlCliente = new CtrlCliente();
+            try {
+                ctrlCliente.remover(Long.parseLong(request.getParameter("id")));
+                request.setAttribute("aviso", "Removido");
+            } catch (Exception ex) {
+                request.setAttribute("erros", ex.toString());
+            }
+            pagina = "admin.jsp?p=reportCliente";
         }
 
         //Retorna para a página

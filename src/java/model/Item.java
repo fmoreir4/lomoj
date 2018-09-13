@@ -70,8 +70,8 @@ public class Item implements Serializable {
         return valorItens;
     }
 
-    public void setValorItens(double valorItens) {
-        this.valorItens = valorItens;
+    public void setValorItens() {
+        this.valorItens = this.produto.getValor() * this.quant;
     }
 
     public Produto getProduto() {
