@@ -9,12 +9,14 @@ import java.io.OutputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Calendar;
 
 public class Arquivo {
 
     public String upload(String pasta, String nomeDoArquivo, InputStream arquivoCarregado)
             throws FileNotFoundException {
-        nomeDoArquivo = crypt(nomeDoArquivo) + ".jpg";
+        Calendar dtc = Calendar.getInstance();
+        nomeDoArquivo = crypt(nomeDoArquivo + dtc.getTime().toString()) + ".jpg";
         String caminhoArquivo = pasta + File.separator + nomeDoArquivo;
         File novoArquivo = new File(caminhoArquivo);
         FileOutputStream saida = new FileOutputStream(novoArquivo);
