@@ -10,10 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
-/**
- *
- * @author Aluno
- */
 @Entity
 public class Pedido implements Serializable {
 
